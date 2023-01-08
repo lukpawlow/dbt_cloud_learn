@@ -1,12 +1,8 @@
-with payments as (
-select * from {{ ref('stg_payments') }}
-),
+with
+    payments as (select * from {{ ref("stg_payments") }}),
+    aggregated as (
 
-aggregated as (
-select
-sum(amount) as total_revenue
-from payments
-where status = 'success'
-)
-
-select * from aggregated
+        select sum(amount) as total_revenue from payments where status = 'success'
+    )
+select *
+from aggregated
