@@ -3,8 +3,8 @@ version: 2
 sources:
   - name: jaffle_shop
     description: a clone of a Postgres database
-    database: raw
-    schema: jaffle_shop
+    database: lpawlowski
+    schema: raw_jaffle_shop
     tables:
       - name: customers
         description: the raw customers data
