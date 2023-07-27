@@ -27,10 +27,12 @@ dbt run-operation clean_stale_models --args '{"dry_run" : "False"}'
     {% endset %}
 
     {{ log('\Generating cleanup queries...\n', info=True) }}
+    {% if execute %}
     {% set drop_queries = run_query(get_drop_commands_query).columns[1].values() %}
-  
+    {% endif %}
+
     {% for query in drop_queries %}
-        {% if dry_run %}
+        {% if execute and dry_run %}
             {{ log('drop_queries: ' ~ query, info=True) }}
         {% else %}
             {{ log('Dropping object with command: ' ~ query, info=True) }}
